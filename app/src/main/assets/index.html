@@ -1,0 +1,60 @@
+<html>
+<body>
+<script type="text/javascript">
+//window.onunload = function() {
+//    console.log("called onunload");
+//    sleep2(2000,
+//        function (){
+//          console.log("End sleep of onunload");
+//         }
+//    );
+//    console.log("End onUnload");
+//}
+//window.onload = function() {
+//    console.log("called onload");
+//    sleep2(2000,
+//        function (){
+//            console.log("End sleep of onload");
+//         }
+//    );
+//}
+
+window.onStop = function() {
+    console.log("called onStop");
+    sleep2(1000,
+        function (){
+            console.log("End sleep of onStop. Do the destroy.");
+            // Native.destroyWebView(); //NG
+         }
+    );
+    Native.destroyWebView(); //OK
+}
+
+function sleep2(time, callback){
+    setTimeout(callback, time);
+}
+
+window.nativeCall = function(who) {
+    console.log("Start nativeCall by " + who);
+    sleep2(2000,
+        function (){
+            console.log("End sleep of nativeCall by " + who);
+         }
+    );
+    console.log("End nativeCall by " + who);
+}
+
+function sleep1(ms) {
+    var d1 = new Date().getTime();
+    var d2 = new Date().getTime();
+    while( d2 < (d1 + ms) ) {
+        d2 = new Date().getTime();
+    }
+    return;
+}
+</script>
+<audio loop autoplay><source src="./greensleeves.mp3"></audio>
+<button onclick="Native.setHandsFree()">hands free</button>
+<button onclick="Native.setNormalPhone()">earpiece</button>
+</body>
+</html>
