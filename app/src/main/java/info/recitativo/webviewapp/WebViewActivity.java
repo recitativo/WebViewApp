@@ -233,6 +233,14 @@ public class WebViewActivity extends AppCompatActivity implements SensorEventLis
     protected void onDestroy() {
         Log.d(TAG, "onDestroy");
         super.onDestroy();
+
+        Log.d(TAG, "destroyWebView");
+        if(mWebView != null) {
+            mWebView.destroy();
+            mWebView = null;
+        } else {
+            Log.d(TAG, "mWebView is NULL!!");
+        }
     }
 
     @Override
